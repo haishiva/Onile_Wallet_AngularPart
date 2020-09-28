@@ -42,21 +42,21 @@ export class MyserviceService {
     const headers =new HttpHeaders().set('Content_Type', 'text/plain ;charset=utf-8');
     return this.httpService.post("http://localhost:7856/onlinewallet/createaccount/"+userId, walletAccount,  { headers, responseType: 'text'});
   }
-  public addMoney(walletAccount: WalletAccount) {
+  public addMoney(walletAccount: WalletAccount,userId: number) {
     console.log("ins service addMoney");
     console.log(walletAccount);
     const headers =new HttpHeaders().set('Content_Type', 'text/plain ;charset=utf-8');
-    return this.httpService.post("http://localhost:7856/onlinewallet/addmoney",walletAccount,  { headers, responseType: 'text'});
+    return this.httpService.post("http://localhost:7856/onlinewallet/addmoney/"+userId,walletAccount,  { headers, responseType: 'text'});
   }
-  public viewBalance(accountId: number) {
+  public viewBalance(accountId: number,userId: number) {
     console.log("ins service view balance");
     const headers =new HttpHeaders().set('Content_Type', 'text/plain ;charset=utf-8');
-    return this.httpService.get<number>("http://localhost:7856/onlinewallet/accountbalance/"+accountId);
+    return this.httpService.get<number>("http://localhost:7856/onlinewallet/accountbalance/"+accountId+"/"+userId);
   }
-  public transferAmount(obj:any) {
+  public transferAmount(userId: number,obj:any) {
     console.log("ins service view balance");
     const headers =new HttpHeaders().set('Content_Type', 'text/plain ;charset=utf-8');
-    return this.httpService.get("http://localhost:7856/onlinewallet/transferfund/"+obj.accountId+"/"+obj.receiveraccountId+"/"+obj.amount,{ headers, responseType: 'text'});
+    return this.httpService.get("http://localhost:7856/onlinewallet/transferfund/"+userId+"/"+obj.accountId+"/"+obj.receiveraccountId+"/"+obj.amount,{ headers, responseType: 'text'});
   }
   public user(user:WalletUser)
   {

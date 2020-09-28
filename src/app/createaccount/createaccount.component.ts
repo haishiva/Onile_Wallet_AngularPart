@@ -16,7 +16,7 @@ export class CreateaccountComponent implements OnInit {
   constructor(private myservice: MyserviceService,private router: Router) {
     this.user=this.myservice.userMethod();
    }
-
+ message: string;
   ngOnInit(): void {
    
   }
@@ -29,8 +29,9 @@ export class CreateaccountComponent implements OnInit {
   }
   hello(response)
   {
-    if (response==null) {
-      this.output="UserId and AccountId are Incorrect"
+    this.message=response;
+    if (this.message==null) {
+      this.output="AccountId already exist";
     } else {
       this.output="Account created Succesfully";
       this.router.navigate(['/']);

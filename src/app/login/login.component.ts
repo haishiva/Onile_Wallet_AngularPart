@@ -22,9 +22,10 @@ export class LoginComponent implements OnInit {
   }
   hello(response)
   {
+    
     this.walletUser=response;
     if (this.walletUser==null) {
-      this.output="UserId and Password are Incorrect"
+      this.output="UserId and Password are Incorrect";
     } else {
       this.output="Logged in Succesfully";
       if (this.walletUser.walletAccount==null) {

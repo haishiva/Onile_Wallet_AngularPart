@@ -12,13 +12,17 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
   }
-message: String;
+message: String=null;
 onSubmit(user: WalletUser)
 {
   console.log(user);
 
    this.myservice.addUser(user).subscribe(data => {
     this.message=data});
+    if(this.message==null)
+    {
+        this.message="userId already exist";
+    }
 }
 
 }

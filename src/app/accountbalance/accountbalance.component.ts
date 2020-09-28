@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MyserviceService } from '../myservice.service';
+import { MyserviceService, WalletUser } from '../myservice.service';
 
 @Component({
   selector: 'app-accountbalance',
@@ -7,15 +7,21 @@ import { MyserviceService } from '../myservice.service';
   styleUrls: ['./accountbalance.component.css']
 })
 export class AccountbalanceComponent implements OnInit {
-
-  output: number;
+ user: WalletUser;
+  output: number=null;
+  message: string;
   constructor(private myservice: MyserviceService) { }
 
   ngOnInit(): void {
+    this.user=this.myservice.userMethod();
   }
   onSubmit(accountId):any{
     console.log();
-    this.myservice.viewBalance(accountId.accountId).subscribe( data => 
+    this.myservice.viewBalance(accountId.accountId,this.user.userId).subscribe( data => 
     this.output=data);
+    if(this.output==null)
+    {
+      this.message="Invalid AccountId";
+    }
   }
 }

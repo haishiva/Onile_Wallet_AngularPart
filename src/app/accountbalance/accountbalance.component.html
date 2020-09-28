@@ -14,8 +14,14 @@
 
             <label>Account ID: </label> <br>
 
-            <input required min="10000" type="number"  #accountId='ngModel' name="accountId" ngModel class="form-control">
+            <input required  pattern=".{5,}"  type="number"  #accountId='ngModel' name="accountId" ngModel class="form-control">
 
+            
+            <div *ngIf='accountId.errors && accountId.touched' class="alert alert-danger">
+
+                <div [hidden]='!accountId.errors.required'> Provide Account Id </div>
+                <div *ngIf='accountId.errors.pattern'>AccountId should contain atleast 5 digits </div>
+            </div>
             
         </div>
        
@@ -28,4 +34,7 @@
 <br>
 <div class="container">
     <h2>{{output}}</h2>
+</div>
+<div class="container" *ngIf="output==null">
+    <h2>{{message}}</h2>
 </div>
